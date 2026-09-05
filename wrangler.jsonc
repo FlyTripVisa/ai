@@ -14,7 +14,7 @@
   "vars": {
     "SITE_NAME": "FlyTripVisa.site",
     "AI_MODEL": "@cf/qwen/qwen3-30b-a3b-fp8",
-    "DEBUG_MODE": "false"
+    "DEBUG_MODE": "true"
   },
 
   "ai": {
