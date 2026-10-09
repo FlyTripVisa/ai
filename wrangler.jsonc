@@ -1,103 +1,11 @@
 {
-  "$schema": "./node_modules/wrangler/config-schema.json",
-  "name": "ai",
-  "main": ".open-next/worker.js",
-  "compatibility_date": "2026-03-24",
-  "compatibility_flags": ["nodejs_compat"],
-  "account_id": "d7f3db941deae1158be54f67184451a1",
-
-  "assets": {
-    "directory": ".open-next/assets",
-    "binding": "ASSETS"
-  },
-
-  "vars": {
-    "SITE_NAME": "FlyTripVisa.site",
-    "AI_MODEL": "@cf/qwen/qwen3-30b-a3b-fp8",
-    "DEBUG_MODE": "true"
-  },
-
-  "ai": {
-    "binding": "AI"
-  },
-
-  "browser": {
-    "binding": "BROWSER",
-    "remote": true
-  },
-
-  "vectorize": [
-    {
-      "binding": "VECTOR_INDEX",
-      "index_name": "embeddings-index"
-    }
-  ],
-
-  "kv_namespaces": [
-    {
-      "binding": "KV",
-      "id": "2085403b5d774d1bbd333bcb8ea0d80b",
-      "preview_id": "YOUR_PREVIEW_KV_NAMESPACE_ID"
-    }
-  ],
-
-  "d1_databases": [
-    {
-      "binding": "DB",
-      "database_name": "admin-db",
-      "database_id": "f0a25976b9e74dc3a26ea7ecd819069e"
-    }
-  ],
-
-  "r2_buckets": [
-    {
-      "binding": "BUCKET",
-      "bucket_name": "mydata"
-    }
-  ],
-
-  "env": {
-    "production": {
-      "name": "flytripvisa-production",
-      "vars": {
-        "SITE_NAME": "FlyTripVisa.site",
-        "AI_MODEL": "@cf/qwen/qwen3-30b-a3b-fp8",
-        "DEBUG_MODE": "false"
-      },
-      "ai": { "binding": "AI" },
-      "browser": { "binding": "BROWSER", "remote": true },
-      "vectorize": [
-        {
-          "binding": "VECTOR_INDEX",
-          "index_name": "embeddings-index"
-        }
-      ],
-      "kv_namespaces": [
-        {
-          "binding": "KV",
-          "id": "2085403b5d774d1bbd333bcb8ea0d80b",
-          "preview_id": "YOUR_PREVIEW_KV_NAMESPACE_ID"
-        }
-      ],
-      "d1_databases": [
-        {
-          "binding": "DB",
-          "database_name": "admin-db",
-          "database_id": "f0a25976b9e74dc3a26ea7ecd819069e"
-        }
-      ],
-      "r2_buckets": [
-        {
-          "binding": "BUCKET",
-          "bucket_name": "mydata"
-        }
-      ],
-      "routes": [
-        {
-          "pattern": "flytripvisa.site/*",
-          "zone_name": "flytripvisa.site"
-        }
-      ]
-    }
-  }
+	"name": "ai",
+	"main": "src/server.ts",
+	"compatibility_date": "2026-10-08",
+	"compatibility_flags": ["nodejs_compat"],
+	"ai": { "binding": "AI" },
+	"durable_objects": {
+		"bindings": [{ "name": "ChatAgent", "class_name": "ChatAgent" }],
+	},
+	"migrations": [{ "tag": "v1", "new_sqlite_classes": ["ChatAgent"] }],
 }
